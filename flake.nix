@@ -2,9 +2,6 @@
   description = "KDE Flake";
 
   inputs = {
-    # the two forms are equivalent for nixpkgs
-    # other software will need to include the src repo
-    # nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
     nixpkgs.url = "nixpkgs/nixos-23.11";
     stylix.url = "github:danth/stylix";
     # home-manager = {
@@ -27,7 +24,6 @@
       nixos = lib.nixosSystem {
         inherit system;
         modules = [
-          # stylix.nixosModules.stylix
           ./configuration.nix
         ];
       };

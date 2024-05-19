@@ -140,5 +140,6 @@
     "nix-command"
     "flakes"
   ];
+  # this seeming does not work with KDE
   stylix.image = ./desktop.png;
 }

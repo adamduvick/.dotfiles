@@ -140,4 +140,5 @@
     "nix-command"
     "flakes"
   ];
+  stylix.image = ./desktop.png;
 }

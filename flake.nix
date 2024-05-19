@@ -14,6 +14,7 @@
     self,
     nixpkgs,
     home-manager,
+    stylix,
     ...
   }: let
     system = "x86_64-linux";
@@ -24,6 +25,7 @@
       nixos = lib.nixosSystem {
         inherit system;
         modules = [
+          stylix.nixosModules.stylix
           ./configuration.nix
         ];
       };

@@ -83,6 +83,7 @@
       spotify
       thunderbird
       whatsapp-for-linux
+      kmetronome
     ];
   };
 

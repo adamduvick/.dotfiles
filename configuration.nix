@@ -72,6 +72,7 @@
       brave
       netflix
       chromium
+      google-chrome
       kate
       kitty
       obsidian

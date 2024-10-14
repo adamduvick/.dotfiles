@@ -76,7 +76,7 @@
       kate
       kitty
       obsidian
-      todoist
+      todoist-electron
       vscode
       vscode-extensions.rust-lang.rust-analyzer
       neovide

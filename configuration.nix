@@ -84,10 +84,6 @@
     description = "Adam Duvick";
     extraGroups = ["networkmanager" "wheel"];
     packages = with pkgs; [
-      firefox
-      brave
-      netflix
-      chromium
       google-chrome
       kate
       kitty
@@ -101,7 +97,6 @@
       spotify
       thunderbird
       whatsapp-for-linux
-      kmetronome
     ];
   };
 

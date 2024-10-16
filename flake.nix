@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-23.11";
-    stylix.url = "github:danth/stylix";
+    # stylix.url = "github:danth/stylix";
     # home-manager = {
     #   url = "github:nix-community/home-manager";
     #   inputs.nixpkgs.follows = "nixpkgs";
@@ -14,7 +14,7 @@
     self,
     nixpkgs,
     home-manager,
-    stylix,
+    # stylix,
     ...
   }: let
     system = "x86_64-linux";
@@ -25,7 +25,7 @@
       nixos = lib.nixosSystem {
         inherit system;
         modules = [
-          stylix.nixosModules.stylix
+          # stylix.nixosModules.stylix
           ./configuration.nix
         ];
       };

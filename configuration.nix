@@ -16,20 +16,21 @@
 
   # These lines are needed to help the network run more smoothly
   # Certain websites are abysmally slow without it
-  networking.nameservers = [
-    "1.1.1.1 # one.one.one.one"
-    "1.0.0.1 # one.one.one.one"
-  ];
-  services.resolved = {
-    enable = true;
-    dnssec = "true";
-    domains = ["~."];
-    fallbackDns = [
-      "1.1.1.1 # one.one.one.one"
-      "1.0.0.1 # one.one.one.one"
-    ];
-    dnsovertls = "true";
-  };
+  # This portion seems to block captive portals so it may need to be commented out occasionally
+  # networking.nameservers = [
+  #   "1.1.1.1 # one.one.one.one"
+  #   "1.0.0.1 # one.one.one.one"
+  # ];
+  # services.resolved = {
+  #   enable = true;
+  #   dnssec = "true";
+  #   domains = ["~."];
+  #   fallbackDns = [
+  #     "1.1.1.1 # one.one.one.one"
+  #     "1.0.0.1 # one.one.one.one"
+  #   ];
+  #   dnsovertls = "true";
+  # };
 
   time.timeZone = "America/Chicago";
 

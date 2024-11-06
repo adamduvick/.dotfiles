@@ -17,20 +17,22 @@
   # These lines are needed to help the network run more smoothly
   # Certain websites are abysmally slow without it
   # This portion seems to block captive portals so it may need to be commented out occasionally
-  # networking.nameservers = [
-  #   "1.1.1.1 # one.one.one.one"
-  #   "1.0.0.1 # one.one.one.one"
-  # ];
-  # services.resolved = {
-  #   enable = true;
-  #   dnssec = "true";
-  #   domains = ["~."];
-  #   fallbackDns = [
-  #     "1.1.1.1 # one.one.one.one"
-  #     "1.0.0.1 # one.one.one.one"
-  #   ];
-  #   dnsovertls = "true";
-  # };
+  # An alternative to commenting this out for captive portals, is to navigate to
+  # http://neversll.com which is non-ssl by design so captive portals can always hijack + redirect
+  networking.nameservers = [
+    "1.1.1.1 # one.one.one.one"
+    "1.0.0.1 # one.one.one.one"
+  ];
+  services.resolved = {
+    enable = true;
+    dnssec = "true";
+    domains = ["~."];
+    fallbackDns = [
+      "1.1.1.1 # one.one.one.one"
+      "1.0.0.1 # one.one.one.one"
+    ];
+    dnsovertls = "true";
+  };
 
   time.timeZone = "America/Chicago";
 
@@ -118,9 +120,24 @@
     ];
   };
 
+  virtualisation = {
+    podman = {
+      enable = true;
+      # Run podman socket with docker compatibility
+      dockerCompat = true;
+      # Required for containers under podman-compose to be able to talk to each other.
+      defaultNetwork.settings.dns_enabled = true;
+      # Create a `docker` alias for podman
+      dockerSocket.enable = true;
+      # Whether to enable authentication for registry
+      autoPrune.enable = true;
+    };
+  };
+
   environment.systemPackages = with pkgs; [
     neovim
     git
+    wget
     gh
     nixd
     alejandra
@@ -138,6 +155,7 @@
     alsa-tools
     alsa-oss
     linux-firmware
+    podman-compose
   ];
 
   # Enable Bluetooh

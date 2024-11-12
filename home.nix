@@ -7,6 +7,13 @@
   home.homeDirectory = "/home/adam";
   home.stateVersion = "23.11";
 
+  nixpkgs.config = {
+    allowUnfree = true;
+    permittedInsecurePackages = [
+      "electron-25.9.0"
+    ];
+  };
+
   # Enable the podman socket service
   systemd.user.services.podman = {
     Unit = {
@@ -37,7 +44,20 @@
     DOCKER_HOST = "unix://$XDG_RUNTIME_DIR/podman/podman.sock";
   };
 
-  home.packages = [];
+  home.packages = [
+    pkgs.google-chrome
+    pkgs.kate
+    pkgs.kitty
+    pkgs.obsidian
+    pkgs.todoist-electron
+    pkgs.vscode
+    pkgs.neovide
+    pkgs.tmux
+    pkgs.discord
+    pkgs.spotify
+    pkgs.thunderbird
+    pkgs.whatsapp-for-linux
+  ];
 
   home.file = {};
 
@@ -51,9 +71,29 @@
     enable = true;
     extensions = with pkgs.vscode-extensions; [
       ms-vscode-remote.remote-containers
+      rust-lang.rust-analyzer
     ];
   };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+  programs.git = {
+    enable = true;
+    userName = "Adam Duvick";
+    userEmail = "adamduvick@gmail.com";
+
+    # Optional but useful git configurations
+    extraConfig = {
+      init.defaultBranch = "main";
+      pull.rebase = false;
+      # Add any other git configurations you want
+    };
+
+    # Optional: Configure git aliases
+    aliases = {
+      st = "status";
+      co = "checkout";
+      # Add any other aliases you use
+    };
+  };
 }

@@ -86,21 +86,6 @@
     isNormalUser = true;
     description = "Adam Duvick";
     extraGroups = ["networkmanager" "wheel"];
-    packages = with pkgs; [
-      google-chrome
-      kate
-      kitty
-      obsidian
-      todoist-electron
-      vscode
-      vscode-extensions.rust-lang.rust-analyzer
-      neovide
-      tmux
-      discord
-      spotify
-      thunderbird
-      whatsapp-for-linux
-    ];
   };
 
   # Steam configuration
@@ -111,14 +96,6 @@
   programs.hyprland.enable = true;
   # Optional, hint electron apps to use wayland:
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
-
-  # Allow unfree packages for Obsidian
-  nixpkgs.config = {
-    allowUnfree = true;
-    permittedInsecurePackages = [
-      "electron-25.9.0"
-    ];
-  };
 
   virtualisation = {
     podman = {

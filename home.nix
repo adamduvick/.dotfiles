@@ -71,7 +71,9 @@
     enable = true;
     extensions = with pkgs.vscode-extensions; [
       ms-vscode-remote.remote-containers
-      rust-lang.rust-analyzer
+      eamodio.gitlens
+      bbenoist.nix
+      ms-python.python
     ];
   };
 

@@ -1,9 +1,8 @@
 {
-  description = "KDE Flake";
+  description = "My NixOS Flake";
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
-    # stylix.url = "github:danth/stylix";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -14,7 +13,6 @@
     self,
     nixpkgs,
     home-manager,
-    # stylix,
     ...
   }: let
     system = "x86_64-linux";
@@ -25,11 +23,11 @@
       nixos = lib.nixosSystem {
         inherit system;
         modules = [
-          # stylix.nixosModules.stylix
           ./configuration.nix
         ];
       };
     };
+
     homeConfigurations = {
       adam = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;

@@ -8,8 +8,8 @@
     ./hardware-configuration.nix
   ];
 
+  services.displayManager.sddm.enable = true;
   services.xserver.enable = true;
-  services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
 
   environment.systemPackages = with pkgs; [
@@ -37,7 +37,7 @@
   ];
 
   # touchpad thing that does nothing
-  services.xserver.libinput.enable = true;
+  services.libinput.enable = true;
 
   # keymap thing that does nothing
   services.xserver.xkb = {

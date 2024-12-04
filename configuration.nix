@@ -12,7 +12,12 @@
   services.xserver.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
 
+  programs.hyprland.enable = true;
+
   environment.systemPackages = with pkgs; [
+    kitty
+    rofi
+    waybar
     neovim
     git
     wget

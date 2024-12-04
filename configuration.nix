@@ -38,6 +38,7 @@
 
   # touchpad thing that does nothing
   services.libinput.enable = true;
+  services.touchegg.enable = true;
 
   # keymap thing that does nothing
   services.xserver.xkb = {

@@ -16,8 +16,13 @@
 
   environment.systemPackages = with pkgs; [
     kitty
-    rofi
+    wofi
     waybar
+    google-chrome
+    font-awesome
+    dunst
+    eww
+    wlsunset
     neovim
     git
     wget

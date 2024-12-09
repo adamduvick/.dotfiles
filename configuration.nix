@@ -4,10 +4,6 @@
   lib,
   ...
 }: {
-  imports = [
-    ./hardware-configuration.nix
-  ];
-
   services.displayManager.sddm.enable = true;
   services.xserver.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
@@ -22,6 +18,7 @@
     font-awesome
     dunst
     eww
+    obsidian
     wlsunset
     neovim
     git
@@ -31,7 +28,6 @@
     alejandra
     python311
     gparted
-    nerdfonts
     neofetch
     pandoc
     rustup
@@ -46,6 +42,9 @@
     podman-compose
   ];
 
+  fonts.packages = builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
+  # TODO get a keyring working, running and automatically unlocked on login
+
   # touchpad thing that does nothing
   services.libinput.enable = true;
   services.touchegg.enable = true;
@@ -57,29 +56,63 @@
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  networking.hostName = "nixos"; # Define your hostname.
   users.users.adam = {
     isNormalUser = true;
     description = "Adam Duvick";
     extraGroups = ["networkmanager" "wheel"];
   };
 
-  # These lines are needed to help the network run more smoothly
-  # Certain websites are abysmally slow without it
-  # This portion seems to block captive portals so it may need to be commented out occasionally
-  # An alternative to commenting this out for captive portals, is to navigate to
-  # http://neversll.com which is non-ssl by design so captive portals can always hijack + redirect
-  networking.nameservers = [
-    "1.1.1.1 # one.one.one.one"
-    "1.0.0.1 # one.one.one.one"
-  ];
+  networking = {
+    # hostName = "nixos";
+
+    # Configure DNS servers manually
+    nameservers = [
+      "1.1.1.1" # Cloudflare
+      "1.0.0.1" # Cloudflare
+      "8.8.8.8" # Google
+      "8.8.4.4" # Google
+    ];
+
+    networkmanager = {
+      enable = true;
+      wifi.powersave = true;
+      dispatcherScripts = [
+        {
+          source = pkgs.writeText "network-dns-switch" ''
+            #!/bin/sh
+            if [ "$2" = "connectivity-change" ]; then
+              # Check if on a captive portal network
+              if nmcli -t -f CONNECTIVITY general status | grep -q "portal"; then
+                # Switch to dhcp-provided DNS
+                resolvectl revert all
+              else
+                # Set custom DNS
+                resolvectl dns systemd-resolved 1.1.1.1 1.0.0.1 8.8.8.8 8.8.4.4
+              fi
+            fi
+          '';
+          type = "basic";
+        }
+      ];
+    };
+
+    # These options are unnecessary when managing DNS ourselves
+    # useDHCP = false;
+    # dhcpcd.enable = false;
+  };
+  # Enable systemd.resolved for DNS management
   services.resolved = {
     enable = true;
+
+    # Disable NetworkManager's internal DNS resolution
+    # networkmanager.dns = "none";
     dnssec = "true";
     domains = ["~."];
     fallbackDns = [
-      "1.1.1.1 # one.one.one.one"
-      "1.0.0.1 # one.one.one.one"
+      "1.1.1.1" # Cloudflare
+      "1.0.0.1" # Cloudflare
+      "8.8.8.8" # Google
+      "8.8.4.4" # Google
     ];
     dnsovertls = "true";
   };
@@ -111,8 +144,6 @@
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
-  networking.networkmanager.enable = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;

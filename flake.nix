@@ -2,7 +2,8 @@
   description = "My NixOS Flake";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -14,25 +15,29 @@
     nixpkgs,
     home-manager,
     ...
-  }: let
-    system = "x86_64-linux";
-    lib = nixpkgs.lib;
-    pkgs = nixpkgs.legacyPackages.${system};
-  in {
-    nixosConfigurations = {
-      nixos = lib.nixosSystem {
+  } @ inputs: let
+    mkSystem = system: hostName: user:
+      nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
+          {networking.hostName = hostName;}
           ./configuration.nix
+          ./hardware-configuration.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useUserPackages = true;
+              useGlobalPkgs = true;
+              extraSpecialArgs = {inherit inputs;};
+              users.${user} = ./home.nix;
+            };
+          }
         ];
+        specialArgs = {inherit inputs;};
       };
-    };
-
-    homeConfigurations = {
-      adam = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [./home.nix];
-      };
+  in {
+    nixosConfigurations = {
+      nixos = mkSystem "x86_64-linux" "nixos" "adam";
     };
   };
 }

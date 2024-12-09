@@ -14,6 +14,9 @@ in {
       hyprpaper
     ];
 
-    home.file.".config/hypr/hyprpaper.conf".source = ./hyprpaper.conf;
+    home.file.".config/hypr/hyprpaper.conf".text = ''
+      preload = ${./desktop.png}
+      wallpaper = , ${./desktop.png}
+    '';
   };
 }

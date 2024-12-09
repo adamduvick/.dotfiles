@@ -8,6 +8,7 @@
   services.xserver.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
 
+  # TODO remove once we can fully configure hyprland through home-manager, but this is not possible with sddm as the login manager
   programs.hyprland.enable = true;
 
   environment.systemPackages = with pkgs; [
@@ -19,7 +20,6 @@
     dunst
     eww
     obsidian
-    wlsunset
     neovim
     git
     wget

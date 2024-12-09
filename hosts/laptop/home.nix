@@ -3,9 +3,13 @@
   pkgs,
   ...
 }: {
+  imports = [../../modules/default.nix];
+  modules = {
+    hyprland.enable = true;
+    hyprpaper.enable = true;
+  };
   home.username = "adam";
   home.homeDirectory = "/home/adam";
-  home.stateVersion = "23.11";
 
   nixpkgs.config = {
     allowUnfree = true;

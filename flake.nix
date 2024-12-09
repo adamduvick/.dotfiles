@@ -21,15 +21,15 @@
         inherit system;
         modules = [
           {networking.hostName = hostName;}
-          ./configuration.nix
-          ./hardware-configuration.nix
+          ./modules/system/configuration.nix
+          ./hosts/laptop/hardware-configuration.nix
           home-manager.nixosModules.home-manager
           {
             home-manager = {
               useUserPackages = true;
               useGlobalPkgs = true;
               extraSpecialArgs = {inherit inputs;};
-              users.${user} = ./home.nix;
+              users.${user} = ./hosts/laptop/home.nix;
             };
           }
         ];

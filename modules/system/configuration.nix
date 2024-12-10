@@ -44,6 +44,9 @@
 
   fonts.packages = builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
   # TODO get a keyring working, running and automatically unlocked on login
+  services.gnome.gnome-keyring.enable = true;
+  programs.nm-applet.enable = true;
+  security.polkit.enable = true;
 
   # touchpad thing that does nothing
   services.libinput.enable = true;

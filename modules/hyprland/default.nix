@@ -15,6 +15,7 @@ in {
       hypridle
       hyprpaper
       hyprlock
+      hyprpolkitagent
       wlsunset
       wl-clipboard
     ];

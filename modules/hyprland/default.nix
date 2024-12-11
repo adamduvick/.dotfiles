@@ -31,5 +31,7 @@ in {
       preload = ${./desktop.png}
       wallpaper = , ${./desktop.png}
     '';
+
+    home.file.".config/waybar/config.jsonc".source = ./waybar.jsonc;
   };
 }

@@ -79,24 +79,6 @@
     networkmanager = {
       enable = true;
       wifi.powersave = true;
-      dispatcherScripts = [
-        {
-          source = pkgs.writeText "network-dns-switch" ''
-            #!/bin/sh
-            if [ "$2" = "connectivity-change" ]; then
-              # Check if on a captive portal network
-              if nmcli -t -f CONNECTIVITY general status | grep -q "portal"; then
-                # Switch to dhcp-provided DNS
-                resolvectl revert all
-              else
-                # Set custom DNS
-                resolvectl dns systemd-resolved 1.1.1.1 1.0.0.1 8.8.8.8 8.8.4.4
-              fi
-            fi
-          '';
-          type = "basic";
-        }
-      ];
     };
 
     # These options are unnecessary when managing DNS ourselves
@@ -117,6 +99,8 @@
       "8.8.8.8" # Google
       "8.8.4.4" # Google
     ];
+
+    # This line seems to be responsible for making captive portals not work
     dnsovertls = "true";
   };
 

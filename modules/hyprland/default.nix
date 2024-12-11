@@ -20,7 +20,6 @@ in {
       wl-clipboard
     ];
 
-    # TODO make these symlinks directly from cwd so altering config gets automatically reloaded by hyprland
     home.file.".config/hypr/hyprland.conf".source = ./hyprland.conf;
 
     home.file.".config/hypr/hypridle.conf".source = ./hypridle.conf;
@@ -32,6 +31,8 @@ in {
       wallpaper = , ${./desktop.png}
     '';
 
-    home.file.".config/waybar/config.jsonc".source = ./waybar.jsonc;
+    home.file.".config/waybar/config.jsonc".source = ./waybar/waybar.jsonc;
+    home.file.".config/waybar/style.css".source = ./waybar/style.css;
+    home.file.".config/waybar/macchiatio.css".source = ./waybar/macchiatio.css;
   };
 }

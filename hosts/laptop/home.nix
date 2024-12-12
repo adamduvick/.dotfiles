@@ -52,7 +52,10 @@
     pkgs.kate
     pkgs.kitty
     pkgs.obsidian
-    pkgs.todoist-electron
+    # anti-aliasing is not working for this.
+    # perhaps it needs gpu driver help or it just sucks
+    # install the PWA for now
+    # pkgs.todoist-electron
     pkgs.vscode
     pkgs.neovide
     pkgs.tmux

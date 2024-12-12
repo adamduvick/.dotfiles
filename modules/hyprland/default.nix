@@ -32,8 +32,8 @@ in {
       wallpaper = , ${./desktop.png}
     '';
 
-    home.file.".config/waybar/config.jsonc".source = ./waybar/waybar.jsonc;
-    home.file.".config/waybar/style.css".source = ./waybar/style.css;
-    home.file.".config/waybar/macchiato.css".source = ./waybar/macchiato.css;
+    # home.file.".config/waybar/config.jsonc".source = ./waybar/waybar.jsonc;
+    # home.file.".config/waybar/style.css".source = ./waybar/style.css;
+    # home.file.".config/waybar/macchiato.css".source = ./waybar/macchiato.css;
   };
 }

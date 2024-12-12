@@ -101,6 +101,7 @@
     ];
 
     # This line seems to be responsible for making captive portals not work
+    # comment this line, rebuild, then visit http://neverssl.com
     dnsovertls = "true";
   };
 

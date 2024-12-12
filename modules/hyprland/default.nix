@@ -18,6 +18,7 @@ in {
       hyprpolkitagent
       wlsunset
       wl-clipboard
+      waybar
     ];
 
     home.file.".config/hypr/hyprland.conf".source = ./hyprland.conf;
@@ -33,6 +34,6 @@ in {
 
     home.file.".config/waybar/config.jsonc".source = ./waybar/waybar.jsonc;
     home.file.".config/waybar/style.css".source = ./waybar/style.css;
-    home.file.".config/waybar/macchiatio.css".source = ./waybar/macchiatio.css;
+    home.file.".config/waybar/macchiato.css".source = ./waybar/macchiato.css;
   };
 }

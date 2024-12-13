@@ -3,7 +3,11 @@
   pkgs,
   lib,
   ...
-}: {
+}: let
+  usLocale = "en_US.UTF-8";
+  userName = "adam";
+  userFullName = "Adam Duvick";
+in {
   services.displayManager.sddm.enable = true;
   services.xserver.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
@@ -59,14 +63,20 @@
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.adam = {
+  users.users.${userName} = {
     isNormalUser = true;
-    description = "Adam Duvick";
+    description = "${userFullName}";
     extraGroups = ["networkmanager" "wheel"];
   };
 
   networking = {
     # hostName = "nixos";
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [443 80];
+      allowedUDPPorts = [443 80 44857];
+      allowPing = false;
+    };
 
     # Configure DNS servers manually
     nameservers = [
@@ -109,7 +119,7 @@
   nix = {
     settings = {
       auto-optimise-store = true;
-      allowed-users = ["adam"];
+      allowed-users = ["${userName}"];
       experimental-features = [
         "nix-command"
         "flakes"
@@ -155,7 +165,7 @@
       efi.canTouchEfiVariables = true;
       # reducing to 0 effectively means that I will not be able to
       # boot into anything other than the latest
-      timeout = 0;
+      timeout = 5;
     };
   };
 
@@ -172,20 +182,21 @@
     pulse.enable = true;
   };
 
-  time.timeZone = "America/Chicago";
-
   # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_US.UTF-8";
-    LC_IDENTIFICATION = "en_US.UTF-8";
-    LC_MEASUREMENT = "en_US.UTF-8";
-    LC_MONETARY = "en_US.UTF-8";
-    LC_NAME = "en_US.UTF-8";
-    LC_NUMERIC = "en_US.UTF-8";
-    LC_PAPER = "en_US.UTF-8";
-    LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
+  time.timeZone = "America/Chicago";
+  i18n = {
+    defaultLocale = usLocale;
+    extraLocaleSettings = {
+      LC_ADDRESS = usLocale;
+      LC_IDENTIFICATION = usLocale;
+      LC_MEASUREMENT = usLocale;
+      LC_MONETARY = usLocale;
+      LC_NAME = usLocale;
+      LC_NUMERIC = usLocale;
+      LC_PAPER = usLocale;
+      LC_TELEPHONE = usLocale;
+      LC_TIME = usLocale;
+    };
   };
 
   # This value determines the NixOS release from which the default

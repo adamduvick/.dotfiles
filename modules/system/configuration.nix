@@ -146,8 +146,18 @@
     };
   };
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  # Boot settings: clean /tmp/, latest kernel and enable bootloader
+  boot = {
+    cleanTmpDir = true;
+    loader = {
+      systemd-boot.enable = true;
+      systemd-boot.editor = false;
+      efi.canTouchEfiVariables = true;
+      # reducing to 0 effectively means that I will not be able to
+      # boot into anything other than the latest
+      timeout = 0;
+    };
+  };
 
   # Enable CUPS to print documents.
   services.printing.enable = true;

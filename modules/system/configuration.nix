@@ -165,9 +165,8 @@ in {
       systemd-boot.enable = true;
       systemd-boot.editor = false;
       efi.canTouchEfiVariables = true;
-      # reducing to 0 effectively means that I will not be able to
-      # boot into anything other than the latest
-      timeout = 5;
+      # Automatically selects latest generation, but this can interrupted with a key press
+      timeout = 0;
     };
   };
 

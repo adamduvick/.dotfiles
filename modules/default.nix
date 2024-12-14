@@ -8,5 +8,6 @@
   imports = [
     ./hyprland
     ./hyprpaper
+    ./zsh
   ];
 }

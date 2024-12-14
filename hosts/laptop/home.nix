@@ -6,6 +6,7 @@
   imports = [../../modules/default.nix];
   modules = {
     hyprland.enable = true;
+    zsh.enable = true;
   };
   home.username = "adam";
   home.homeDirectory = "/home/adam";

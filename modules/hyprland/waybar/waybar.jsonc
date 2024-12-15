@@ -49,37 +49,35 @@
             },
             "show-special": true,
             "persistent-workspaces": {
-                "*": 10,
-            },
+                "*": 10
+            }
         },
         "hyprland/submap": {
             "format": "<span color='#a6da95'>Mode:</span> {}",
-            "tooltip": false,
+            "tooltip": false
         },
         "clock#time": {
-            "format": "{:%I:%M %p}",
-            // "locale": "en_US.UTF-8",
-            // "timezones": [ "Europe/Kyiv", "America/New_York" ],
+            "format": "{:%I:%M %p}"
         },
         "custom/separator": {
             "format": "|",
-            "tooltip": false,
+            "tooltip": false
         },
         "custom/separator_dot": {
             "format": "•",
-            "tooltip": false,
+            "tooltip": false
         },
         "clock#week": {
-            "format": "{:%a}",
+            "format": "{:%a}"
         },
         "clock#month": {
-            "format": "{:%h}",
+            "format": "{:%h}"
         },
         "clock#calendar": {
             "format": "{:%F}",
             "tooltip-format": "<tt><small>{calendar}</small></tt>",
             "actions": {
-                "on-click-right": "mode",
+                "on-click-right": "mode"
             },
             "calendar": {
                 "mode": "month",
@@ -94,7 +92,7 @@
                     "weekdays": "<span color='#a6da95'><b>{}</b></span>",
                     "today": "<span color='#8bd5ca'><b><u>{}</u></b></span>"
                 }
-            },
+            }
         },
         "clock": {
             "format": "{:%I:%M %p %Ez | %a • %h | %F}",
@@ -103,7 +101,7 @@
             // "locale": "en_US.UTF-8",
             // "timezones": [ "Europe/Kyiv", "America/New_York" ],
             "actions": {
-                "on-click-right": "mode",
+                "on-click-right": "mode"
             },
             "calendar": {
                 "mode": "month",
@@ -118,7 +116,7 @@
                     "weekdays": "<span color='#a6da95'><b>{}</b></span>",
                     "today": "<span color='#8bd5ca'><b><u>{}</u></b></span>"
                 }
-            },
+            }
         },
         "custom/media": {
             "format": "{icon}󰎈",
@@ -126,7 +124,7 @@
             "return-type": "json",
             "format-icons": {
                 "Playing": "",
-                "Paused": "",
+                "Paused": ""
             },
             "max-length": 35,
             "exec": "fish -c fetch_music_player_data",
@@ -135,7 +133,7 @@
             "on-click-middle": "playerctl prev",
             "on-scroll-up": "playerctl volume 0.05-",
             "on-scroll-down": "playerctl volume 0.05+",
-            "smooth-scrolling-threshold": "0.1",
+            "smooth-scrolling-threshold": "0.1"
         },
         "bluetooth": {
             "format": "󰂯",
@@ -150,7 +148,7 @@
             "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t({device_battery_percentage}%)",
             "max-length": 35,
             "on-click": "fish -c bluetooth_toggle",
-            "on-click-right": "overskride",
+            "on-click-right": "overskride"
         },
         "network": {
             "format": "󰤭",
@@ -171,7 +169,7 @@
             // "tooltip-format-ethernet":"Interface: {ifname}\nIP: {ipaddr}\nGW: {gwaddr}\nNetmask: {netmask}\nCIDR: {cidr}\n\n<span color='#a6da95'>{bandwidthUpBits}</span>\t<span color='#ee99a0'>{bandwidthDownBits}</span>\t<span color='#c6a0f6'>󰹹{bandwidthTotalBits}</span>",
             "max-length": 35,
             "on-click": "fish -c wifi_toggle",
-            "on-click-right": "iwgtk",
+            "on-click-right": "iwgtk"
         },
         "group/misc": {
             "orientation": "horizontal",
@@ -184,13 +182,13 @@
                 "custom/dunst",
                 "custom/night_mode",
                 "custom/airplane_mode",
-                "idle_inhibitor",
-            ],
+                "idle_inhibitor"
+            ]
         },
         "custom/webcam": {
             "interval": 1,
             "exec": "fish -c check_webcam",
-            "return-type": "json",
+            "return-type": "json"
         },
         "privacy": {
             "icon-spacing": 1,
@@ -198,42 +196,42 @@
             "transition-duration": 250,
             "modules": [
                 {
-                    "type": "audio-in",
+                    "type": "audio-in"
                 },
                 {
-                    "type": "screenshare",
-                },
+                    "type": "screenshare"
+                }
             ]
         },
         "custom/recording": {
             "interval": 1,
             "exec-if": "pgrep wl-screenrec",
             "exec": "fish -c check_recording",
-            "return-type": "json",
+            "return-type": "json"
         },
         "custom/geo": {
             "interval": 1,
             "exec-if": "pgrep geoclue",
             "exec": "fish -c check_geo_module",
-            "return-type": "json",
+            "return-type": "json"
         },
         "custom/airplane_mode": {
             "return-type": "json",
             "interval": 1,
             "exec": "fish -c check_airplane_mode",
-            "on-click": "fish -c airplane_mode_toggle",
+            "on-click": "fish -c airplane_mode_toggle"
         },
         "custom/night_mode": {
             "return-type": "json",
             "interval": 1,
             "exec": "fish -c check_night_mode",
-            "on-click": "fish -c night_mode_toggle",
+            "on-click": "fish -c night_mode_toggle"
         },
         "custom/dunst": {
             "return-type": "json",
             "exec": "fish -c dunst_pause",
             "on-click": "dunstctl set-paused toggle",
-            "restart-interval": 1,
+            "restart-interval": 1
         },
         "idle_inhibitor": {
             "format": "{icon}",
@@ -243,14 +241,14 @@
             },
             "tooltip-format-activated": "idle-inhibitor <span color='#a6da95'>on</span>",
             "tooltip-format-deactivated": "idle-inhibitor <span color='#ee99a0'>off</span>",
-            "start-activated": true,
+            "start-activated": true
         },
         "custom/logout_menu": {
             "return-type": "json",
             "exec": "echo '{ \"text\":\"󰐥\", \"tooltip\": \"logout menu\" }'",
             "interval": "once",
-            "on-click": "fish -c wlogout_uniqe",
-        },
+            "on-click": "fish -c wlogout_uniqe"
+        }
     },
     // Bottom Bar Config
     {
@@ -273,14 +271,14 @@
         // Modules Config
         "hyprland/window": {
             "format": "👼 {title} 😈",
-            "max-length": 50,
+            "max-length": 50
         },
         "hyprland/language": {
             "format-en": "🇺🇸 ENG (US)",
             "format-uk": "🇺🇦 UKR",
             "format-ru": "🇷🇺 RUS",
             "keyboard-name": "at-translated-set-2-keyboard",
-            "on-click": "hyprctl switchxkblayout at-translated-set-2-keyboard next",
+            "on-click": "hyprctl switchxkblayout at-translated-set-2-keyboard next"
         },
         "keyboard-state": {
             "capslock": true,
@@ -293,8 +291,8 @@
         },
         "user": {
             "format": " <span color='#8bd5ca'>{user}</span> (up <span color='#f5bde6'>{work_d} d</span> <span color='#8aadf4'>{work_H} h</span> <span color='#eed49f'>{work_M} min</span> <span color='#a6da95'>↑</span>)",
-            "icon": true,
-        },
+            "icon": true
+        }
     },
     // Left Bar Config
     {
@@ -330,11 +328,11 @@
             "tooltip-format": "{title}",
             "on-click": "activate",
             "on-click-right": "close",
-            "on-click-middle": "fullscreen",
+            "on-click-middle": "fullscreen"
         },
         "tray": {
             "icon-size": 20,
-            "spacing": 2,
+            "spacing": 2
         },
         "cpu": {
             "format": "󰻠 {usage}%",
@@ -343,10 +341,10 @@
                 "upper-medium": 70,
                 "medium": 50,
                 "lower-medium": 30,
-                "low": 10,
+                "low": 10
             },
             "on-click": "wezterm start btop",
-            "on-click-right": "wezterm start btm",
+            "on-click-right": "wezterm start btm"
         },
         "memory": {
             "format": " {percentage}%",
@@ -356,10 +354,10 @@
                 "upper-medium": 70,
                 "medium": 50,
                 "lower-medium": 30,
-                "low": 10,
+                "low": 10
             },
             "on-click": "wezterm start btop",
-            "on-click-right": "wezterm start btm",
+            "on-click-right": "wezterm start btm"
         },
         "disk": {
             "format": "󰋊 {percentage_used}%",
@@ -369,10 +367,10 @@
                 "upper-medium": 70,
                 "medium": 50,
                 "lower-medium": 30,
-                "low": 10,
+                "low": 10
             },
             "on-click": "wezterm start btop",
-            "on-click-right": "wezterm start btm",
+            "on-click-right": "wezterm start btm"
         },
         "temperature": {
             "tooltip": false,
@@ -386,7 +384,7 @@
                 "",
                 "",
                 ""
-            ],
+            ]
         },
         "battery": {
             "states": {
@@ -394,7 +392,7 @@
                 "upper-medium": 70,
                 "medium": 50,
                 "lower-medium": 30,
-                "low": 10,
+                "low": 10
             },
             "format": "{icon}{capacity}%",
             "format-charging": "󱐋{icon}{capacity}%",
@@ -413,7 +411,7 @@
                 "󰂂",
                 "󰁹"
             ],
-            "tooltip-format": "{timeTo}",
+            "tooltip-format": "{timeTo}"
         },
         "backlight": {
             "format": "{icon}{percent}%",
@@ -428,7 +426,7 @@
                 "󱩔",
                 "󱩕",
                 "󱩖",
-                "󰛨",
+                "󰛨"
             ],
             "tooltip": false,
             "states": {
@@ -436,10 +434,10 @@
                 "upper-medium": 70,
                 "medium": 50,
                 "lower-medium": 30,
-                "low": 10,
+                "low": 10
             },
             "reverse-scrolling": true,
-            "reverse-mouse-scrolling": true,
+            "reverse-mouse-scrolling": true
         },
         "pulseaudio": {
             "states": {
@@ -447,7 +445,7 @@
                 "upper-medium": 70,
                 "medium": 50,
                 "lower-medium": 30,
-                "low": 10,
+                "low": 10
             },
             "tooltip-format": "{desc}",
             "format": "{icon}{volume}%\n{format_source}",
@@ -469,15 +467,15 @@
                 "default": [
                     "󰕿",
                     "󰖀",
-                    "󰕾",
-                ],
+                    "󰕾"
+                ]
             },
             "reverse-scrolling": true,
             "reverse-mouse-scrolling": true,
-            "on-click": "pavucontrol",
+            "on-click": "pavucontrol"
         },
         "systemd-failed-units": {
-            "format": "✗ {nr_failed}",
-        },
-    },
+            "format": "✗ {nr_failed}"
+        }
+    }
 ]

@@ -21,8 +21,8 @@ in {
       dotDir = ".config/zsh";
 
       enableCompletion = true;
-      enableAutosuggestions = true;
-      enableSyntaxHighlighting = true;
+      autosuggestion.enable = true;
+      syntaxHighlighting.enable = true;
 
       # .zshrc
       initExtra = ''

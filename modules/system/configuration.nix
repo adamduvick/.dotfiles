@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  inputs,
   ...
 }: let
   usLocale = "en_US.UTF-8";
@@ -15,16 +16,27 @@ in {
   # TODO remove once we can fully configure hyprland through home-manager, but this is not possible with sddm as the login manager
   programs.hyprland.enable = true;
 
+  services.playerctld.enable = true;
+
+  # this allegedly makes brightness keys enable independant of DE
+  # but it doesn't seem to work
+  programs.light.brightnessKeys.enable = true;
+
   environment.systemPackages = with pkgs; [
-    kitty
-    wofi
-    waybar
-    google-chrome
-    font-awesome
-    dunst
-    eww
-    obsidian
-    neovim
+    wev # for mapping key presses and system events
+    killall # nothing useful
+    networkmanagerapplet # network manager system tray
+    kitty # terminal
+    wofi # app launcher
+    waybar # status bar
+    google-chrome # browser
+    font-awesome # fonts, but I am not sure if I use them
+    dunst # notification daemon to be setup
+    eww # another widget maker that is not in use
+    obsidian # notes
+    neovim # editor
+    slirp4netns # for docker container networking
+    playerctl
     git
     wget
     gh
@@ -46,6 +58,8 @@ in {
     podman-compose
   ];
 
+  nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
+
   fonts.packages = builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
   # TODO get a keyring working, running and automatically unlocked on login
   services.gnome.gnome-keyring.enable = true;
@@ -64,11 +78,12 @@ in {
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   programs.zsh.enable = true;
+  users.defaultUserShell = pkgs.zsh;
   users.users.${userName} = {
     isNormalUser = true;
     description = "${userFullName}";
     extraGroups = ["networkmanager" "wheel"];
-    shell = pkgs.zsh;
+    useDefaultShell = true;
   };
 
   networking = {
@@ -114,6 +129,8 @@ in {
 
     # This line seems to be responsible for making captive portals not work
     # comment this line, rebuild, then visit http://neverssl.com
+    # I tried this out and validated this hypothesis.
+    # TODO make a script to toggle this item
     dnsovertls = "true";
   };
 

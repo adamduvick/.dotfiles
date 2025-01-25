@@ -8,6 +8,7 @@
   usLocale = "en_US.UTF-8";
   userName = "adam";
   userFullName = "Adam Duvick";
+  swapPartition = "/dev/nvme0n1p11";
 in {
   services.displayManager.sddm.enable = true;
   services.xserver.enable = true;
@@ -36,6 +37,7 @@ in {
     obsidian # notes
     neovim # editor
     slirp4netns # for docker container networking
+    wlogout
     playerctl
     git
     wget
@@ -57,8 +59,6 @@ in {
     linux-firmware
     podman-compose
   ];
-
-  nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
 
   fonts.packages = builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
   # TODO get a keyring working, running and automatically unlocked on login
@@ -92,6 +92,12 @@ in {
       enable = true;
       allowedTCPPorts = [443 80];
       allowedUDPPorts = [443 80 44857];
+      allowedUDPPortRanges = [
+        {
+          from = 32768;
+          to = 61000;
+        }
+      ]; # For Streaming
       allowPing = false;
     };
 
@@ -136,6 +142,7 @@ in {
 
   # Nix settings, auto cleanup and enable flakes
   nix = {
+    nixPath = ["nixpkgs=${inputs.nixpkgs}"];
     settings = {
       auto-optimise-store = true;
       allowed-users = ["${userName}"];
@@ -175,8 +182,13 @@ in {
     };
   };
 
+  # Needed for hibernation
+  powerManagement.enable = true;
+  swapDevices = [{device = swapPartition;}];
+
   # Boot settings: clean /tmp/, latest kernel and enable bootloader
   boot = {
+    resumeDevice = swapPartition;
     tmp.cleanOnBoot = true;
     loader = {
       systemd-boot.enable = true;

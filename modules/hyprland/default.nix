@@ -19,6 +19,7 @@ in {
       wlsunset
       wl-clipboard
       waybar
+      brightnessctl
     ];
 
     # home.file.".config/hypr/hyprland.conf".source = ./hyprland.conf;

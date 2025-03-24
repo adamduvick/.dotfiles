@@ -28,6 +28,7 @@ in {
     killall # nothing useful
     networkmanagerapplet # network manager system tray
     kitty # terminal
+    ghostty #terminal
     wofi # app launcher
     waybar # status bar
     google-chrome # browser
